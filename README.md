@@ -1,90 +1,112 @@
 # Employee Management System
 
-This repository contains **Backend (Django + DRF)** and **Frontend (React + TypeScript)** for a dynamic Employee Management System.
+This repository contains the **Backend (Django + DRF)** and **Frontend (React + TypeScript)** for a dynamic Employee Management System.
 
--------------------------------------------
-BACKEND (Django + DRF)
--------------------------------------------
+---
+## 📌 Backend (Django + DRF)
 
-A Django REST Framework backend with JWT auth, profile management, dynamic Form Templates, and Employee CRUD backed by JSON fields.
+The backend provides authentication (JWT), profile management, dynamic form templates, and employee CRUD functionality using JSON fields.
 
-## Tech Stack
-- Django 4 / DRF
-- SimpleJWT (access/refresh tokens)
-- drf-yasg (Swagger)
+### ⚙️ Tech Stack
+- Django 4 / Django REST Framework
+- SimpleJWT (access/refresh token authentication)
 - django-cors-headers
-- SQLite (default)
+- SQLite (default, can be swapped with Postgres)
 
-## Quickstart
+### 🚀 Quickstart
 
 ```bash
+# 1. Create & activate virtual environment
 python -m venv venv
 source venv/bin/activate   # Windows: venv\Scripts\activate
+
+# 2. Install dependencies
 pip install -r requirements.txt
+
+# 3. Apply migrations
 python manage.py makemigrations
 python manage.py migrate
+
+# 4. (Optional) Create superuser
 python manage.py createsuperuser
+
+# 5. Run the development server
 python manage.py runserver
 ```
 
-## Endpoints
+### 🔗 Endpoints
 
-### Auth & Profile (/api/admin/)
-- POST `/register/` → create user
-- POST `/login/` → JWT tokens
-- POST `/refresh/` → refresh token
-- GET `/profile/` → view
-- PUT `/profile/` → update `{ phone, avatar }`
-- PUT `/change-password/`
+#### Auth & Profile (`/api/admin/`)
+- **POST** `/register/` → Register a new user
+- **POST** `/login/` → Obtain JWT access & refresh tokens
+- **POST** `/refresh/` → Refresh access token
+- **GET** `/profile/` → Retrieve profile
+- **PUT** `/profile/` → Update `{ phone, avatar }`
+- **PUT** `/change-password/` → Change password
 
-### Forms (/api/forms/)
-- CRUD for form templates with schema JSON
+#### Forms (`/api/forms/`)
+- Full CRUD for dynamic form templates  
+- Schema stored as JSON
 
-### Employees (/api/employees/)
-- CRUD for employees with dynamic fields keyed by label
-- Supports soft delete `/soft-delete/`
-- Supports search by query params using labels
+#### Employees (`/api/employees/`)
+- Full CRUD for employees with **dynamic fields** keyed by **field label**
+- Supports **soft delete** `/soft-delete/`
+- Supports **search by query params** using labels  
+  Example:  
+  ```
+  GET /api/employees/?Full%20Name=John&Department=Sales
+  ```
 
+---
+## 🎨 Frontend (React + TypeScript)
 
--------------------------------------------
-FRONTEND (React + TS)
--------------------------------------------
+The frontend provides a modern UI for authentication, form builder, and employee management.
 
-A modern React UI for authentication, dynamic form builder, and employee CRUD powered by the Django backend.
-
-## Tech Stack
+### ⚙️ Tech Stack
 - React + TypeScript
 - React Router
-- Axios (JWT with interceptors)
+- Axios (with JWT interceptors)
 - TailwindCSS
-- @dnd-kit for drag & drop
+- @dnd-kit (drag & drop for form builder)
 - lucide-react icons
 
-## Quickstart
+### 🚀 Quickstart
 
 ```bash
+# 1. Install dependencies
 npm install
+
+# 2. Copy environment file
 cp .env.example .env
+
+# 3. Run the dev server
 npm run dev
 ```
 
-### .env Example
+### ⚙️ .env Example
 ```
 VITE_API_BASE_URL=http://127.0.0.1:8000
 ```
 
-## Routes
-- `/login`, `/register`
-- `/profile`
-- `/` → dashboard
-- `/forms` → form builder
-- `/employees` → list
-- `/employees/create`
-- `/employees/edit/:id`
+### 🔗 Routes
+- `/login` → Login page
+- `/register` → Registration page
+- `/profile` → Profile settings
+- `/` → Dashboard
+- `/forms` → Dynamic form builder
+- `/employees` → Employee listing
+- `/employees/create` → Create employee
+- `/employees/edit/:id` → Edit employee
 
-## Notes
-- Use `/api/admin/...` endpoints for auth.
-- Employee `data` must be keyed by **field labels**.
-- Profile update backend only supports `{ phone, avatar }` unless extended.
+### 📝 Notes
+- Use `/api/admin/...` endpoints for authentication.
+- Employee `data` payload must be keyed by **form field labels**.
+- Profile update supports `{ phone, avatar }` unless extended in backend.
 
--------------------------------------------
+---
+## ✅ Summary
+
+- **Backend**: Django REST Framework with JWT auth, forms, and employee APIs.  
+- **Frontend**: React + TypeScript with Tailwind, dynamic form builder, and employee CRUD.  
+- **Next Steps**: Extend profile update fields, add Postgres/JSONB support for advanced search, and improve dashboard analytics.
+
