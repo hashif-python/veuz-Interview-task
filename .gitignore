@@ -1,0 +1,5 @@
+# Logs
+
+ems_frontend/.env
+ems_frontend/node_modules
+venv/
